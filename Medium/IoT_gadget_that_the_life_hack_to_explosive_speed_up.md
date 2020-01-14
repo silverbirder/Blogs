@@ -1,5 +1,4 @@
 #Links
-https://medium.com/@silverbirder/フィリピンに行ってきたら-日本は良いなって思うようになった-d444d8f2fcf8
 
 #Title
 IoT Gadget that the life hack to explosive speed up 🚀⚡️️️️️⚡️️️
@@ -7,24 +6,24 @@ It's the Google Home, Nature Remo, SESAME, and more !
 
 ---
 
-# Motivation
+---
+
+IoT Gadget that the life hack to explosive speed up 🚀⚡️️️️️⚡️️️
+It's the Google Home, Nature Remo, SESAME, and more !
+Photo by Ben Kolde on UnsplashMotivation
 ひょっとしたことです。社の先輩がNature Remoなるスマートリモコンを私にお勧めして下さったところから始まります。少し気になったので、購入してみました。
-当時、一人暮らしだった私にとって、テレビや照明、エアコンの制御は、手動でしていました。特に面倒とは感じていなかったのですが、Nature Remoのスケジューリングトリガーを使った家電制御は、一気に生活効率が良くなりました。少し具体的に言うと、赤外線送信で制御される家電製品をNature Remoが代行してくれます。そのため例えば、Nature Remoで "19時に指定家電を起動" を設定すれば、
-
-
+当時、一人暮らしだった私にとって、テレビや照明、エアコンの制御は、手動でしていました。特に面倒とは感じていなかったのですが、Nature Remoのスケジューリングトリガーを使った家電制御は、一気に生活効率を良くしてくれました。
+少し具体的に言うと、赤外線送信で制御される家電製品をNature Remoが代行してくれます。そのため例えば、Nature Remoで "19時に指定家電を起動" を設定すれば、
 家に帰ってきた頃には、テレビ&照明&エアコンが全部起動してくれている、超便利…。
-
-
 そこから、沼にハマっていきました。
 
 
 ---
 
-# List up the my IoT Gadgets
+List up the my IoT Gadgets
 沼にハマった私が、次々にIoTのGadgetを購入していきました。その商品名、動機、よかったことを軽く紹介します。
 ※ IoTでなかったり、まだ購入していないものも少しだけ触れます。
-
-# My standard for choosing the IoT
+My standard for choosing the IoT
 プログラマブルであることが最も重要です。一般的に、こういったIoT Gadgetは、専用のアプリが提供されています。商品利用の初期段階であれば、そのアプリが謳っている使い方に真似するだけでも十分便利です。ただ、少しマニアックで、ニッチなことをしたくなることが、必ず訪れます。
 例えば、先に紹介したNature Remoであれば
 
@@ -32,10 +31,12 @@ It's the Google Home, Nature Remo, SESAME, and more !
 テレビ&照明&エアコンを手動で制御
 Nature Remoで1を自動で制御
 
+
+
 までは順当な進み方です。少しマニアックで、ニッチな例は
 
 
-Nature Remoの照明センサをトリガーに、別IoTを起動する (IFTTT)
+玄関の扉が空いたら(SESAME)、Nature Remoで照明をONにする
 
 
 
@@ -49,19 +50,57 @@ Nature Remo
 Nature Remo
 あなたと始める電力革命nature.global
 What is it?
+Nature Remo（ネイチャーリモ）は、ご自宅のリモコンをスマホひとつにまとめたり、外出先からもスマホでエアコンなどの家電を操作することができるスマートリモコンです。設定が簡単でメーカーや型番・年式などに関係なく、古いエアコンやテレビなどの旧式の家電にもお使いいただけます。 ※ https://nature.global/jp/nature-remo
+赤外線で制御する家電のみに限られるため、無線で制御する家電は対象外です。
+また、Nature Remo Miniのトリガー機能は、温度、GPS、時間によるトリガーのみで、Nature Remoのトリガー機能は、それに加えて、湿度、照度、人感センサーもあります。
 Motivation
+先に説明したとおりです。
 Pros & Cons
+Pros
+家電の登録がとても簡単
+専用アプリのUIがわかりやすい
+トリガーが充実している
+
+Cons
+(Google Homeに限るかもしれないが) スマートスピーカーと連携する際、ON/OFF ボタンの用意が必要。
+赤外線が届く範囲でしか制御できない。
+
 Programmable
 Nature Inc
 TOKEN} 部には、OAuth2を通して取得したアクセストークンを入れる。 自分のアクセストークンは、 home.nature.global より新規発行や失効することができる。…developer.nature.global
-
-
 Google Home
 Google Home
 Google Home is a powerful speaker and voice Assistant. Play your music. Call your friends. Ask it questions. Control…store.google.com
 What is it?
+"OK Google" と話しかけると、Google で調べ物ができたり、音楽を再生したりするのはもちろん、毎日の予定の管理やスマートホームの操作も簡単にできます。 ※ https://store.google.com/product/google_home
+"OK Google, おはよう" と話しかけると、ざっと次のような項目を読み上げてくれます。(事前設定あり)
+今日の天気
+今日の予定
+交通状況
+ニュース
+
+上記項目の確認手段(スマホ,テレビ,etc)は代替可能ですが、声で気軽に操作するユーザー体験は、とてもストレスフリーで快適です。
+Google Homeとしてのスマートスピーカーの利点は、(当たり前ですが) G Suite系との連携がしやすいです。GMailやGoogle Calendar等を普段使用している人には、相性が良いです。
 Motivation
+IoT Gadgetを操作する手段は、基本的に専用アプリ経由になります。何かしら思いついたときに動作させると、必ずスマホを開く→アプリを操作というステップになってしまいます。これは、元々の操作ステップよりも、多くなっています。リモコンをポチッとするだけですからね。
+Nature Remoの例だと、"暗くして映画でも見ようか。スマホを開いて、Nature Remoアプリを起動して、照明セットをタップして、OFFボタンをタップ。よし、映画を楽しもう。 あれ、リモコンの方が楽じゃない？"
+そこで、声の出番です。"OK Google, 照明をOFFにして" と伝えるだけです。
 Pros & Cons
+Pros
+連携サービスが豊富 (Spotifyをよく使ってます)
+言い回しをある程度拾ってくれる (OFFにして, 消して, 止めて)
+言葉に紐づく行動をカスタマイズできる
+
+Cons
+Google HomeのテレビCMで、反応しちゃう (可愛い)
+Google Homeの声は、男性か女性かの2択
+Google Homeは受け身であり、発話しない
+
+
+
+※ ちなみに最後は、下記リポジトリで解決できます。
+Silver-birder/notify-message-by-google-home
+Contribute to Silver-birder/notify-message-by-google-home development by creating an account on GitHub.github.com
 Programmable
 Google Assistant | Google Developers
 The developer platform for the Google Assistant.developers.google.com
@@ -214,4 +253,4 @@ Getting Started Welcome to Awair Developer APIs! This page aims to get you start
 Nature Remo E
 Nature Remo E - Nature
 Nature Remo Eの設置はとても簡単。配線工事や専門業者は必要なく、ご家庭のコンセントに挿すだけで取り付けが完了します。コンパクトなサイズで、他のコンセント穴の邪魔になることもありません。 Nature Remo (別売)…nature.global
-空気清浄機、加湿器でよいものを探しています。また関係なくお勧め商品ありましたら、ぜひコメントください。
+お勧め商品ありましたら、ぜひコメントください。
