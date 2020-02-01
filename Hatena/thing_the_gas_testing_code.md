@@ -5,20 +5,162 @@ TBD
 Google Apps Script でも テスト がしたい！
 
 # Contents
-## Google Apps Scriptのテストってどうしてますか？
 
+<figure class="figure-image figure-image-fotolife" title="Google Apps Script + Typescript + Jest">[f:id:silverbirder180:20200201212044p:plain]<figcaption>Google Apps Script + Typescript + Jest</figcaption></figure>
 
-## 雑感(書く内容メモ)
+Google Apps Script(以下,GAS)でライブラリを公開しました。ライブラリを開発する上で、<b>テストのフィードバックサイクルを短くする</b>ため、`Clasp + Typescript + Jest` という技術スタックを選択しました。
+開発体験について共有しようと思います。特段変わったことはしていません。愚直に考え進めただけです。
 
-* Google Apps Scriptのテストがやっかい
-  * わざわざブラウザエディタひらいて、デバッグ実行。面倒
-  * 連携サービスに依存するため、結果が不安定。何が原因か調べる大変
-  * ストレスフル！！！
-* Clasp + TypeScript + Jest でローカルテスト 
-  * ImplをMockで差し替えてテスト
-  * ストレスフリー
-* 実際にライブラリを作ってみた
-  * CaATは、GoogleCalendarの予定時間をカスタマイズして計算できるライブラリ
-  * https://www.npmjs.com/package/@silverbirder/caat
-  * https://github.com/Silver-birder/caat
-  * https://github.com/Silver-birder/SampleCaat
+[:contents]
+
+# Google Apps Scriptのテストってどうしてますか？
+
+[script.google.com](https://script.google.com/)にアクセスしてデバッグ実行って、しんどくないですか？
+
+<figure class="figure-image figure-image-fotolife" title="Google Apps Script Debugging...">[f:id:silverbirder180:20200201212655p:plain]<figcaption>Google Apps Script Debugging...</figcaption></figure>
+
+* ネットワーク越しでステップ実行するため、<b>遅い</b>
+* G Suite系のサービスと連携すると、サービス側の調整(データ準備とか)が<b>面倒</b>
+* デバッグ機能が<b>貧弱</b>
+
+とても<span style="color: #d32f2f"><b>ストレスフル</b></span>です。単純なGASなら別に良いんですが、少しちゃんとしたGASを作ろうと思うと、少し考えものです。
+
+# ローカルで動かそう
+GASをローカル環境で動かすことができる ClaspというコマンドラインツールがGoogleより公開されています。
+[https://github.com/google/clasp:embed:cite]
+
+また、ClaspはTypescriptをサポートしているため、型を中心としたコーディングが可能となりました。
+[https://www.npmjs.com/package/@types/google-apps-script:embed:cite]
+
+Typescriptを選択すると、Interface設計が容易になります。もちろん、`.gs` ファイルでも同様の事は実現できると思います。
+
+次に、Jestと呼ばれるテストツールを組み合わせることで、ローカル環境でテストが可能になります。
+[https://jestjs.io/docs/getting-started:embed:cite]
+
+ただ、単純にテストコードが書けません。
+例えば、カレンダーのイベントを取得するテストをコーディングするとき、次のようなスクリプトを書いたとします。
+
+```typescript
+const calendar: Calendar = CalendarApp.getCalendarById('<your google calendar id>');
+calendar.getEvents(new Date('2020-01-01'), new Date('2020-01-02')).forEach((calendarEvent: CalendarEvent)=> {
+   console.log(calendarEvent.getTitle());
+});
+```
+
+こう書いてしまうと、本当のカレンダーイベントを取りに行ってしまいます。テストであれば、そういった処理は避けたいところです。
+そこで、`CalendarApp` を偽物のオブジェクト、つまりMockオブジェクトに差し替えるため、依存性逆転の原則(dependency inversion principle)を適用します。
+
+```typescript
+interface ICalendarApp {
+    calendars?: Array<ICalendar>;
+    getCalendarById(id: string): ICalendar;
+}
+
+interface ICalendar {
+    calendarEvents?: Array<ICalendarEvent>
+    getEvents(startTime: Date, endTime: Date): Array<ICalendarEvent>;
+}
+
+interface ICalendarEvent {
+    title?: string,
+    getTitle(): string;
+}
+
+class CalendarAppMock implements ICalendarApp {
+    calendars?: Array<ICalendar>;
+
+    getCalendarById(id: string): ICalendar {
+        return this.calendars![0].calendar
+    }
+}
+
+class CalendarAppImpl implements ICalendarApp {
+
+    getCalendarById(id: string):  ICalendar{
+        const calendar: ICalendar = CalendarApp.getCalendarById(id);
+        return calendar;
+    }
+}
+```
+
+このようなインターフェース・クラスを準備し、先程のコードを次のようにします。
+
+```typescript
+const calendar: ICalendar = new CalendarAppMock().getCalendarById();
+calendar.getEvents(new Date('2020-01-01'), new Date('2020-01-02')).forEach((calendarEvent: ICalendarEvent)=> {
+    console.log(calendarEvent.getTitle());
+});
+```
+
+結果、`CalendarApp` の代わりにMockオブジェクトを差し込めるようになりました。ローカルテストが可能となります。
+
+もちろん、プロダクトコードでは、`CalendarAppMock` ではなく、 `CalendarAppImpl` を使用すれば良いです。
+Mockで差し替えるオブジェクトが増えると、InversifyJSのようなDIコンテナを検討してみると良いかもしれません。
+[https://github.com/inversify/InversifyJS:embed:cite]
+
+こうすることで、Jestによるテストが動作するようになります。  
+実際に、開発・公開したライブラリでも十分にテストをすることができました。
+[https://www.npmjs.com/package/@silverbirder/caat:embed:cite]
+
+```bash
+CaAT $ npm run test -- --coverage
+
+> jest "--coverage"
+
+ PASS  __tests__/utils/dateUtils.test.ts
+ PASS  __tests__/group/groupImpl.test.ts
+ PASS  __tests__/member/memberImpl.test.ts
+---------------------|---------|----------|---------|---------|-------------------
+File                 | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+---------------------|---------|----------|---------|---------|-------------------
+All files            |   98.43 |    97.62 |   96.67 |   98.37 |                   
+ __tests__           |     100 |      100 |     100 |     100 |                   
+  generator.ts       |     100 |      100 |     100 |     100 |                   
+ src/calendar        |    93.1 |      100 |   92.31 |   92.59 |                   
+  calendarAppImpl.ts |      60 |      100 |      50 |      60 | 6,7               
+  calendarAppMock.ts |     100 |      100 |     100 |     100 |                   
+ src/group           |     100 |      100 |     100 |     100 |                   
+  groupImpl.ts       |     100 |      100 |     100 |     100 |                   
+ src/member          |     100 |    94.74 |     100 |     100 |                   
+  memberImpl.ts      |     100 |    94.74 |     100 |     100 | 38                
+ src/utils           |     100 |      100 |     100 |     100 |                   
+  dateUtils.ts       |     100 |      100 |     100 |     100 |                   
+---------------------|---------|----------|---------|---------|-------------------
+
+Test Suites: 3 passed, 3 total
+Tests:       23 passed, 23 total
+Snapshots:   0 total
+Time:        2.826s, estimated 6s
+Ran all test suites.
+```
+
+ライブラリとして提供する機能のテストが、たったの<b>約3秒</b>で終わります。
+<span style="color: #d32f2f"><b>ストレスフリー</b></span>にローカル開発が可能となりました。
+
+詳しくは、実際に作ったライブラリのソースコード([__tests__](https://github.com/Silver-birder/CaAT/tree/master/__tests__))を御覧ください。
+
+# 終わりに
+GASは、とても便利です。生産性が向上します。
+サクッとAPIを構築できますし、G Suiteとの連携も(当たり前ですが)簡単です。
+
+ただ、メンテナンス性が低いコードになると、陳腐化され誰も面倒が見れなくなります。
+常にクリーンであり続けるためには、テストコードは必須です。
+GASを運用する方々には、是非とも"テストコード"を検討下さい。
+
+# え、あ、ちょっとまって。ライブラリの紹介！
+アジャイル開発で、かつ、Google Calendarで予定管理しているチームには是非とも使って頂きたいライブラリです。
+[https://github.com/Silver-birder/caat:embed:cite]
+
+> CaAT is the Google Apps Script Library that Calculate the Assigned Time in Google Calendar.
+
+このツールでできることは、次のとおりです。
+
+* 指定期間における特定ユーザーのGoogle Calendarで予定されているイベント工数(分)を取得
+* 重複している予定は、連続した予定とみなす
+* 指定の時間・単語は、計算対象外とみなす (ランチなど）
+* 誰がいつ休みなのか、終日イベントから取得
+
+実際にサンプルコードがあるので、ご参考下さい。
+
+[https://github.com/Silver-birder/SampleCaat:embed:cite]
+
