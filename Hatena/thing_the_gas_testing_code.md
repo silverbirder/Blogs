@@ -2,14 +2,13 @@
 TBD
 
 # Title
-Google Apps Script でも テスト がしたい！
+Google Apps Script でも テスト がしたい！ (Clasp + Typescript + Jest)
 
 # Contents
-
 <figure class="figure-image figure-image-fotolife" title="Google Apps Script + Typescript + Jest">[f:id:silverbirder180:20200201212044p:plain]<figcaption>Google Apps Script + Typescript + Jest</figcaption></figure>
 
-Google Apps Script(以下,GAS)でライブラリを公開しました。ライブラリを開発する上で、<b>テストのフィードバックサイクルを短くする</b>ため、`Clasp + Typescript + Jest` という技術スタックを選択しました。
-開発体験について共有しようと思います。特段変わったことはしていません。愚直に考え進めただけです。
+Google Apps Script(以下,GAS)でライブラリを公開しました。ライブラリを開発する際、<b>テストのフィードバックサイクルを短くする</b>ため、`Clasp + Typescript + Jest` という技術スタックを選択しました。
+その開発体験について共有しようと思います。特段変わったことはしていません。
 
 [:contents]
 
@@ -17,13 +16,13 @@ Google Apps Script(以下,GAS)でライブラリを公開しました。ライ�
 
 [script.google.com](https://script.google.com/)にアクセスしてデバッグ実行って、しんどくないですか？
 
-<figure class="figure-image figure-image-fotolife" title="Google Apps Script Debugging...">[f:id:silverbirder180:20200201212655p:plain]<figcaption>Google Apps Script Debugging...</figcaption></figure>
+<figure class="figure-image figure-image-fotolife" title="Google Apps Script Debugging ...">[f:id:silverbirder180:20200201234221p:plain]<figcaption>Google Apps Script Debugging ...</figcaption></figure>
 
 * ネットワーク越しでステップ実行するため、<b>遅い</b>
 * G Suite系のサービスと連携すると、サービス側の調整(データ準備とか)が<b>面倒</b>
 * デバッグ機能が<b>貧弱</b>
 
-とても<span style="color: #d32f2f"><b>ストレスフル</b></span>です。単純なGASなら別に良いんですが、少しちゃんとしたGASを作ろうと思うと、少し考えものです。
+とても<span style="color: #d32f2f"><b>ストレスフル</b></span>です。単純なGASなら別に良いんですが、少し複雑なGASを作ろうと思うと、問題に感じます。
 
 # ローカルで動かそう
 GASをローカル環境で動かすことができる ClaspというコマンドラインツールがGoogleより公開されています。
@@ -38,7 +37,7 @@ Typescriptを選択すると、Interface設計が容易になります。もち�
 [https://jestjs.io/docs/getting-started:embed:cite]
 
 ただ、単純にテストコードが書けません。
-例えば、カレンダーのイベントを取得するテストをコーディングするとき、次のようなスクリプトを書いたとします。
+例えば、カレンダーイベントを取得するテストをコーディングするとき、次のようなスクリプトを書いたとします。
 
 ```typescript
 const calendar: Calendar = CalendarApp.getCalendarById('<your google calendar id>');
@@ -137,15 +136,15 @@ Ran all test suites.
 ライブラリとして提供する機能のテストが、たったの<b>約3秒</b>で終わります。
 <span style="color: #d32f2f"><b>ストレスフリー</b></span>にローカル開発が可能となりました。
 
-詳しくは、実際に作ったライブラリのソースコード([__tests__](https://github.com/Silver-birder/CaAT/tree/master/__tests__))を御覧ください。
+詳しくは、実際に作ったライブラリのソースコード([\_\_tests\_\_](https://github.com/Silver-birder/CaAT/tree/master/__tests__))を御覧ください。
 
 # 終わりに
 GASは、とても便利です。生産性が向上します。
 サクッとAPIを構築できますし、G Suiteとの連携も(当たり前ですが)簡単です。
 
-ただ、メンテナンス性が低いコードになると、陳腐化され誰も面倒が見れなくなります。
-常にクリーンであり続けるためには、テストコードは必須です。
-GASを運用する方々には、是非とも"テストコード"を検討下さい。
+ただ、メンテナンス性が低いコードになると、<span style="color: #d32f2f"><b>陳腐化され誰も面倒が見れなくなります</b></span>。
+常にクリーンであり続けるためには、テストコードは<b>必須</b>です。
+GASを運用する方々には、是非ともテストコードを検討下さい。
 
 # え、あ、ちょっとまって。ライブラリの紹介！
 アジャイル開発で、かつ、Google Calendarで予定管理しているチームには是非とも使って頂きたいライブラリです。
@@ -155,7 +154,7 @@ GASを運用する方々には、是非とも"テストコード"を検討下さ
 
 このツールでできることは、次のとおりです。
 
-* 指定期間における特定ユーザーのGoogle Calendarで予定されているイベント工数(分)を取得
+* 指定期間における特定ユーザーのGoogle Calendarで予定されている時間(分)を取得
 * 重複している予定は、連続した予定とみなす
 * 指定の時間・単語は、計算対象外とみなす (ランチなど）
 * 誰がいつ休みなのか、終日イベントから取得
