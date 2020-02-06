@@ -14,7 +14,7 @@ Algolia + Cloudinary + Google Cloud Vision API on Cloud Run でTiqav2(画像会�
 というフレーズだけって、相手の感情が読む取りにくいですよね。
 
 LINEのスタンプ（画像）を送信することで、会話の雰囲気を柔らかくすることができます。
-https://i2.wp.com/sozaikoujou.com/wordpress/wp-content/uploads/2018/05/th_giri_nice.png
+https://res.cloudinary.com/silverbirder/image/upload/v1580997144/LGTM/golia.png
 
 いいかんじですね！
 
