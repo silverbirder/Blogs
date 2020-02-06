@@ -5,43 +5,43 @@ TBD
 Algolia + Cloudinary + Google Cloud Vision API on Cloud Run でTiqav2(画像会話用画像検索サービス)を作ってみた
 (Typescript + InversifyJS + CleanArchitecture)
 
-# Contents
+[:contents]
+
+# 画像で会話って楽しい
 皆さん、LINEでスタンプって使ってますか？僕はよく使ってます。
+人とコミュニケーションするのに、文字だけだと<b>堅苦しくなりがち</b>です。
 
-人とコミュニケーションをするのに、文字だけだと堅苦しくなりがちです。
+『OKです、それで進めてください』というフレーズだけって、相手の感情が読む取りにくいですよね。怒なの？
 
-『OKです、それで進めてください』
-というフレーズだけって、相手の感情が読む取りにくいですよね。
 
 LINEのスタンプ（画像）を送信することで、会話の雰囲気を柔らかくすることができます。
-https://res.cloudinary.com/silverbirder/image/upload/v1580997144/LGTM/golia.png
-
-いいかんじですね！
+例えば、こういう画像です。
+[https://res.cloudinary.com/silverbirder/image/upload/v1580997144/LGTM/golia.png:image=https://res.cloudinary.com/silverbirder/image/upload/v1580997144/LGTM/golia.png]
 
 こういった画像を使って会話をするためのサービスTiqavがあります。
-http://dev.tiqav.com/
+[http://dev.tiqav.com/:embed:cite]
 
 現在は、サービス終了しています。
 Tiqav2は、そのTiqavをインスパイヤされて作りました。
 
-# Tiqav2
+# Tiqav2について
 
-ざっくり下記の機能です。
+Tiqav2は、
 
-1. 画像データの保存
-2. 画像の検索
-3. 画像の表示
+画像を
 
-大きな作りとしては、
+1. 保存
+1. 検索
+1. 表示
 
-<図！>
+という３機能があります。
 
-1. 画像のテキストをGoogle Cloud Vision APIで抽出（手動で設定可。quote引数）
-2. 画像をcloudinaryに保存し、そのURLを手に入れる (si=1のみ。それ以外は、元のURLが手に入る)
-3. 1と2の結果をalgoliaに保存
-4. 検索する際は、algoliaに問い合わせ
-5. 検索すると、JSON形式でレスポンス
-6. idと拡張子を指定することで、画像が返却される
+まず、画像を保存する機能は、次のような図です。
+<figure class="figure-image figure-image-fotolife" title="Searching Flow  By Tiqav2">[f:id:silverbirder180:20200207074252p:plain]<figcaption>Searching Flow  By Tiqav2</figcaption></figure>
+
+
+次に、検索と表示する機能は、次のような図です。
+<figure class="figure-image figure-image-fotolife" title="Searching Flow  By Tiqav2">[f:id:silverbirder180:20200207074256p:plain]<figcaption>Searching Flow  By Tiqav2</figcaption></figure>
 
 # SaaSの適材適所
 
