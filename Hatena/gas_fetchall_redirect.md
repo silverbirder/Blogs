@@ -1,11 +1,10 @@
 # Links
-TODO
+https://silverbirder180.hatenablog.com/entry/2020/02/24/094442
 
 # Title
 Google Apps Script で FetchAllとRedirctURL の組み合わせは悪い
 
 # Contents
-
 Google Apps Script (以下、GAS)で、困ったことがあったので備忘録として残しておこうと思います。
 
 [:contents]
@@ -14,18 +13,18 @@ Google Apps Script (以下、GAS)で、困ったことがあったので備忘�
 
 特定ハッシュタグにおける、ツイートに書いてあるリンクを集めようとしていました。
 そのリンクは、特定のドメインのみでフィルタリングしたいとも思っていました。
-これらをRESTful APIとして提供したかったので、GASで作ろうと考えていました。
+これらをRESTful APIとして提供したかったので、手軽に作れるGASで作ろうと考えていました。
 
 # 取り組んでみたこと
 
 Twitterに書くリンクは、全て短縮URLになります。
 そのため、短縮URLにアクセスし、リダイレクト先のURLを取りに行く必要がありました。
-GASでは、`followRedirects`というオプションをfalseにし、responseHeaderのlocationを取ることで、解決(リダイレクト先のURL取得が)できます。
+GASでは、リクエストメソッドであるfetchがあります。そのfetchの`followRedirects`というオプションをfalseにし、responseHeaderのlocationを取ることで、解決(リダイレクト先のURL取得が)できます。
 
 [https://developers.google.com/apps-script/reference/url-fetch/url-fetch-app#advanced-parameters:embed:cite]
 
 また、1リクエストだけをするfetchでは、直列処理になってしまうため、大変遅いです。
-複数リクエストができるfeatchAllを使うことで、並列処理ができ、パフォーマンスが良いです。
+複数リクエストが同時にできるfeatchAllを使うことで、並列処理ができ、パフォーマンスが良いです。
 要するに次のようなコードで解決しようと考えていました。
 
 <figure class="figure-image figure-image-fotolife" title="FetchAllとRedirectURL">[f:id:silverbirder180:20200224084938p:plain]<figcaption>FetchAllとRedirectURL</figcaption></figure>
@@ -84,5 +83,15 @@ Promise.allSettled が使えれば、解決できるのかなと思いますが�
 そもそもなのですが、今回やろうとしたことってGASの良さがないですよね。
 GASは、GSuites連携を簡単にできるという良さがあります。
 
-しかし、今回はちょっとしたクローラーを作りたいだけです。GASでも作れると思いますが、いくつかを妥協しないといけなくなります。
+しかし、今回はちょっとしたクローラーを作りたいだけでした。もちろん、GASでも作れると思いますが、いくつかを妥協しないといけなくなります。
+
 もし、そこが妥協できないのであれば、別の手段を検討する必要があります。
+
+# 教訓
+
+* 表面的
+  * fetchAllするときは、リダイレクト先URLを取得しない
+* 根本的
+  * 目的に適したツールを選択する
+
+ちなみに、このツールは、並列処理をシンプルにコーティングできるgolangで書き直そうと考えています。
