@@ -1,0 +1,88 @@
+# Links
+TODO
+
+# Title
+Google Apps Script で FetchAllとRedirctURL の組み合わせは悪い
+
+# Contents
+
+Google Apps Script (以下、GAS)で、困ったことがあったので備忘録として残しておこうと思います。
+
+[:contents]
+
+# やろうとしたこと
+
+特定ハッシュタグにおける、ツイートに書いてあるリンクを集めようとしていました。
+そのリンクは、特定のドメインのみでフィルタリングしたいとも思っていました。
+これらをRESTful APIとして提供したかったので、GASで作ろうと考えていました。
+
+# 取り組んでみたこと
+
+Twitterに書くリンクは、全て短縮URLになります。
+そのため、短縮URLにアクセスし、リダイレクト先のURLを取りに行く必要がありました。
+GASでは、`followRedirects`というオプションをfalseにし、responseHeaderのlocationを取ることで、解決(リダイレクト先のURL取得が)できます。
+
+[https://developers.google.com/apps-script/reference/url-fetch/url-fetch-app#advanced-parameters:embed:cite]
+
+また、1リクエストだけをするfetchでは、直列処理になってしまうため、大変遅いです。
+複数リクエストができるfeatchAllを使うことで、並列処理ができ、パフォーマンスが良いです。
+要するに次のようなコードで解決しようと考えていました。
+
+<figure class="figure-image figure-image-fotolife" title="FetchAllとRedirectURL">[f:id:silverbirder180:20200224084938p:plain]<figcaption>FetchAllとRedirectURL</figcaption></figure>
+
+```typescript
+let urlList: Array<string> = ['https://t.co/XXXX', 'https://t.co/YYYY'];
+const locationList: Array<string> = [];
+while (true) {
+    const requestList: Array<URLFetchRequest> = urlList.map((url: string) => {
+        return {
+            url: url,
+            method: 'get',
+            followRedirects: false,
+            muteHttpExceptions: true,
+        }
+    });
+    const responseList: Array<HTTPResponse> = UrlFetchApp.fetchAll(requestList);
+    urlList = [];
+    responseList.forEach((response: HTTPResponse) => {
+        const allHeaders: any = response.getAllHeaders();
+        const location: string = allHeaders['Location'];
+        if (location) {
+            locationList.push(location);
+            urlList.push(location);
+        }
+    });
+    if (urlList.length === 0) {
+        break;
+    }
+}
+return locationList;
+```
+
+# 困ったこと
+
+この手段だと、Locationを1つ1つ辿っていくことになります。
+そのため、リダイレクトを自動的に追う( `followRedirects: true` )よりも、処理コストが大きいです。まあ、そこは目を瞑ります。
+
+次です。
+
+[https://www.monotalk.xyz/blog/google-app-script-%E3%81%AE-urlfetchapp-%E3%81%AE-%E4%BE%8B%E5%A4%96%E3%83%8F%E3%83%B3%E3%83%89%E3%83%AA%E3%83%B3%E3%82%B0%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/:embed:cite]
+
+fetchやfetchAllは、`muteHttpExceptions: true` としたとしても、ExceptionErrorが発生してしまいます。
+そうすると、例えば1000件のURLをfetchAllした場合、<b>どれが成功で、どれが失敗で、どれが未実施か</b> がわからないというところです。
+
+<figure class="figure-image figure-image-fotolife" title="FetchAllとRedirectURL (Error)">[f:id:silverbirder180:20200224090136p:plain]<figcaption>FetchAllとRedirectURL (Error)</figcaption></figure>
+
+Promise.allSettled が使えれば、解決できるのかなと思いますが、現状Promiseは使えません。
+
+私が思う解決策としては、
+
+* fetchAllではなく、fetchを使う
+* fetchAllでリクエストする件数をいくつかの塊に分ける。(一気にではなく、分ける）
+
+# 最後に
+そもそもなのですが、今回やろうとしたことってGASの良さがないですよね。
+GASは、GSuites連携を簡単にできるという良さがあります。
+
+しかし、今回はちょっとしたクローラーを作りたいだけです。GASでも作れると思いますが、いくつかを妥協しないといけなくなります。
+もし、そこが妥協できないのであれば、別の手段を検討する必要があります。
