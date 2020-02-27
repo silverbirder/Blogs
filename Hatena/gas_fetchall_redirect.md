@@ -58,6 +58,26 @@ while (true) {
 return locationList;
 ```
 
+##### 追記 (20200228)
+
+[https://developer.twitter.com/en/docs/tweets/search/api-reference/get-search-tweets:embed:cite]
+
+TwitterのAPIレスポンスに `urls` がありました。説明はありませんでしたが、Tweetに貼られたリンク(短縮URLと、オリジナルURL)の情報が入るそうです。
+
+```
+"urls": [
+          {
+            "url": "https://t.co/Rbc9TF2s5X",
+            "expanded_url": "https://twitter.com/i/web/status/1125490788736032770",
+            "display_url": "twitter.com/i/web/status/1…",
+            "indices": [
+              117,
+              140
+            ]
+          }
+ ]
+```
+
 # 困ったこと
 
 この手段だと、Locationを1つ1つ辿っていくことになります。
