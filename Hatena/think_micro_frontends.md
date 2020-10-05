@@ -8,9 +8,17 @@
 [f:id:silverbirder180:20201004121748j:plain]
 <span>Photo by <a href="https://unsplash.com/@thevisualiza?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Dil</a> on <a href="https://unsplash.com/s/photos/lego-block?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
 
+Micro Frontendsに関わる記事を100件以上読みました(参考記事に記載しています)。そこから得たMicro Frontendsについてこの投稿に記録します。
+また、調査メモについて、次のリポジトリに残しています。
+[https://github.com/Silver-birder/think-micro-frontends:embed:cite]
+
 [:contents]
 
-# Micro Frontends 実績企業
+# 発端
+
+[https://www.thoughtworks.com/radar/techniques/micro-frontends:embed:cite]
+
+# 実績企業
 
 * Airbnb
 * Allegro
@@ -65,84 +73,33 @@
 
 [https://bluesoft.com/micro-frontends-the-missing-piece-of-the-puzzle-in-feature-teams/:embed:cite]
 
-## サーバーサイド統合
-
-選択基準
-
-- 良好な読み込みパフォーマンスと検索エンジンのランキングがプロジェクトの優先事項であること
-
-技術
-
-- Podium
-- Ara-Framework
-  - Hypernova
-- Tailor
-- Micromono
-- PuzzleJS
-- namecheap/ilc(Clientも可)
-
-## エッジサイド統合
-
-選択基準
-
-- サーバーサイド統合と同じ
-
-技術
-
-- Varnish EDI
-- Edge Worker
-
-CDN
-
-- Akamai
-- Cloudfront
-- Fastly
-- CloudFlare
-- Fly.io
-
-## クライアント統合
-
-選択基準
-
-- さまざまなチームのユーザーインターフェイスを 1 つの画面に統合する必要があるインタラクティブなアプリケーションを構築すること
-
-技術
-
-- Ajax
-- Iframe
-- Web Components
-- Luigi
-- Single-Spa
-- FrintJS
-- Hinclude
-- Mashroom
-
-## ビルド時統合
-
-選択基準
-
-- 他の統合が非常に複雑に思われる場合に、小さなプロジェクト（3 チーム以下）にのみ使用すること
-
-技術
-
-- Bit.dev
-- Open Components
-- Piral
+|統合|選択基準|技術|
+|--|--|--|
+|サーバーサイド統合|良好な読み込みパフォーマンスと検索エンジンのランキングがプロジェクトの優先事項であること|・Podium<br>・Ara-Framework<br>・Tailor<br>・Micromono<br>・PuzzleJS<br>・namecheap/ilc(Clientも可)|
+|エッジサイド統合|サーバーサイド統合と同じ|・Varnish EDI <br>・Edge Worker<br>・CDN<br>・ Akamai<br>・ Cloudfront<br>・ Fastly<br>・CloudFlare<br>・ Fly.io|
+|クライアント統合|さまざまなチームのユーザーインターフェイスを 1 つの画面に統合する必要があるインタラクティブなアプリケーションを構築すること|・Ajax<br>・Iframe<br>・Web Components<br>・Luigi<br>・Single-Spa<br>・FrintJS<br>・Hinclude<br>・Mashroom|
+|ビルド時統合|他の統合が非常に複雑に思われる場合に、小さなプロジェクト（3 チーム以下）にのみ使用すること|・ Bit.dev<br>・ Open Components<br>・ Piral|
 
 # 機能
 ## コミュニケーション
 
-- Event
-- EventBus
-- Pub/Sub
+[https://developer.mozilla.org/ja/docs/Web/API/CustomEvent:embed:cite]
+[https://github.com/postaljs/postal.js:embed:cite]
 
 ## データ共有
 
-- URL
-- Cookie
-- Local Storage/Session Storage
+* ストレージ
+  * URL
+  * Cookie
+  * Local Storage/Session Storage
 
-※ WebPack Module Federation
+
+## モジュール共有
+
+* webpack
+  * Module Federation
+  * Externals
+  * DllPlugin
 
 ## ルーティング
 
@@ -151,7 +108,8 @@ Vaddin router
 
 ## キャッシュ
 
-Service Worker (IndexedDB)
+[https://developer.mozilla.org/ja/docs/Web/API/Service_Worker_API:embed:cite]
+[https://developer.mozilla.org/ja/docs/Web/API/IndexedDB_API:embed:cite]
 
 ## ロギング
 
@@ -159,46 +117,46 @@ TODO
 
 ## トレース
 
-Open Tracing
+TODO
 
 ## 認証
 
-- JWT (token)
-- サインインまたはサインアップエクスペリエンスを含む MFE が JWT トークンを取得し、アプリシェルを介してローカルストレージに保存します。
+* JWT (token)
+
+サインインまたはサインアップエクスペリエンスを含む MFE が JWT トークンを取得し、アプリシェルを介してローカルストレージに保存します。
   その後、アプリシェルは認証された領域を読み込みます。認証された MFE はローカルストレージからトークンを取得し、トークンを必要とする他の API だけでなく、
   リフレッシュアクセストークン API を消費するために使用します。これは、私のアカウントセクションのように認証が必要な他の MFE にも当てはまります。
 
 ## 計測
 
-- Google Analytics
-
-- Navigation Timing API
-- Resource Timing API
-- High Resolution Time API
-- User Timing API
-- Frame Timing API
-- [Performance](https://developer.mozilla.org/ja/docs/Web/API/Performance)
-- Server Timing API
-- Performance Observer
+* Google Analytics
+* Navigation Timing API
+* Resource Timing API
+* High Resolution Time API
+* User Timing API
+* Frame Timing API
+* [Performance](https://developer.mozilla.org/ja/docs/Web/API/Performance)
+* Server Timing API
+* Performance Observer
 
 ### Real User Monitoring
 
-- SpeedCurve
-- Catchpoint
-- New Relic
-- Boomerang.js
-- Parfume.js
-- sitespeed.io
+* SpeedCurve
+* Catchpoint
+* New Relic
+* Boomerang.js
+* Parfume.js
+* sitespeed.io
 
 ### Synthetics Monitoring
 
-- Lighthouse
-- WebpageTest
+* Lighthouse
+* WebpageTest
 
 ## Performance
 
-- Skeleton UI
-- HTTP/2, HTTP/3
+* Skeleton UI
+* HTTP/2, HTTP/3
 
 ## Proxy
 
@@ -207,7 +165,7 @@ Open Tracing
 
 ## アクセス履歴
 
-- History API
+[https://developer.mozilla.org/ja/docs/Web/API/History_API:embed:cite]
 
 # 分割ポリシー
 
@@ -219,83 +177,41 @@ Open Tracing
 - 垂直分割
   - 画面毎に分割
 
-# Document-Application
+# Webサイト⇔Webアプリ
 
 ![document-application](https://miro.medium.com/max/1224/1*NJMQCgyMShhjYx6dE_pbRw.png)
 
 マイクロフロントエンドは、かなりのオーバーラップがあるバンドの中央部分の大部分に最も適しています。バンドの両極端に該当するプロジェクトにマイクロフロントエンドアーキテクチャを実装しようとすると、生産性に反することが証明されます。
 
-# Repository Management
-## Mono Repository
+# リポジトリ
+## モノリポ
 
-- Pros
-  - コードベース全体に簡単にアクセスできるようにする場合に最適に機能する。(検出可能性は高い)
-- Cons
-  - 時間の経過とともに、モノリポジトリは、特に大規模なチームで作業しているときに、動作が遅くなる傾向があり、バージョン管理下のコミットとファイルの数が増加する。
+* Pros
+  * コードベース全体に簡単にアクセスできるようにする場合に最適に機能する。(検出可能性は高い)
+* Cons
+  * 時間の経過とともに、モノリポジトリは、特に大規模なチームで作業しているときに、動作が遅くなる傾向があり、バージョン管理下のコミットとファイルの数が増加する。
 
 [https://nx.dev:embed:cite]
 [https://github.com/lerna/lerna:embed:cite]
 
-## Multi Repository
+## マルチリポ
 
-- Pros
-  - マルチリポジトリは、非常に大規模なプロジェクトとそれに取り組む非常に大規模なチームがある場合に最適。
-  - 独自のマイクロアプリに厳密に取り組むチームがある場合に最適に機能する。
-- Cons
-  - マルチリポジトリ環境では、各マイクロアプリを個別にビルドする必要がある。
+* Pros
+  * マルチリポジトリは、非常に大規模なプロジェクトとそれに取り組む非常に大規模なチームがある場合に最適。
+  * 独自のマイクロアプリに厳密に取り組むチームがある場合に最適に機能する。
+* Cons
+  * マルチリポジトリ環境では、各マイクロアプリを個別にビルドする必要がある。
 
-# Fusion Of Other Architectures
-
-## Modular Monolith
-
-[Deconstructing the Monolith – Shopify Engineering](https://engineering.shopify.com/blogs/engineering/deconstructing-monolith-designing-software-maximizes-developer-productivity)
-
-モジュール式のモノリスは、すべてのコードが単一のアプリケーションを強化するシステムであり、異なるドメイン間に厳密に強制された境界があります。
-
-- コード編成
-- 依存関係の分離
-- 境界の適用
-
-[kgrzybek/modular-monolith-with-ddd](https://github.com/kgrzybek/modular-monolith-with-ddd)
-
-- Inertia.js
-
-modular monolith 用フレームワーク
-
-要調査
-
-## Enterprise Architecture (Clean Architecture)
-
-レイヤリングと Dependency Inversion Principle (DIP)による Architecture
-
-- [Building an Enterprise Application with Vue](https://medium.com/javascript-in-plain-english/building-vue-enterprise-application-part-0-overture-6d41bea14236)
-  - [soloschenko-grigoriy/vue-vuex-ts](https://github.com/soloschenko-grigoriy/vue-vuex-ts/)
-
-## Jam Stack
-
-JamStack は、Javascript, API、Markup の 3 つを使った Architecture。
-
-- Pros
-  - 高速なパフォーマンス
-    - ビルド済みのマークアップとアセットを CDN で提供
-  - 安全な
-    - サーバーやデータベースの脆弱性を心配するニーズ
-  - 安価な
-    - 静的ファイルのホスティングは安いか、無料
-  - 開発者エクスペリエンス
-    - フロントエンド開発者は、モノリシックアーキテクチャに縛られることなく、フロントエンドに集中できます。これは通常、より迅速で集中的な開発を意味します
-  - スケーラビリティ
-    - 製品が急にバイラルになり、多くのアクティブユーザーがいる場合、CDN はシームレスに補正します
-- Cons
-  - ページ数が多いと、build に時間がかかる
-  - リアルタイム更新はできない。（動的なことができない）
-
-## App Shell
-
-> アプリケーション シェル（App Shell）アーキテクチャは、ネイティブ アプリのように瞬時に、そして確実にユーザーの画面に読み込める Progressive Web App を構築する方法の 1 つです。
-> アプリの「シェル」とは、ユーザー インターフェースが機能するために必要な最小限の HTML、CSS、JavaScript です。これらをオフラインで使用できるようにキャッシュしておくことで、ユーザーが同じページに再アクセスした際に、瞬時に高いパフォーマンス が発揮されます。つまり App Shell は、ユーザーがアクセスするたびにネットワークからすべて読み込まれるわけではなく、必要なコンテンツだけが読み込まれます。
-> JavaScript を多用したアーキテクチャのシングルページ アプリに対しては、App Shell が有力なアプローチとなります。このアプローチではアプリを実行させるために（Service Worker を使用して）積極的にセルをキャッシュします。次に、JavaScript を使用して各ページの動的コンテンツを読み込みます。App Shell はオフライン環境で、最初の HTML コンテンツを高速で画面に表示するのに役立ちます。
-> ※ [App Shell モデル](https://developers.google.com/web/fundamentals/architecture/app-shell?hl=ja)
+# 他アーキテクチャ
+* Modular Monolith
+  * [Deconstructing the Monolith – Shopify Engineering](https://engineering.shopify.com/blogs/engineering/deconstructing-monolith-designing-software-maximizes-developer-productivity)
+  * [kgrzybek/modular-monolith-with-ddd](https://github.com/kgrzybek/modular-monolith-with-ddd)
+* Enterprise Architecture (Clean Architecture)
+  * [Building an Enterprise Application with Vue](https://medium.com/javascript-in-plain-english/building-vue-enterprise-application-part-0-overture-6d41bea14236)
+  * [soloschenko-grigoriy/vue-vuex-ts](https://github.com/soloschenko-grigoriy/vue-vuex-ts/)
+* Jam Stack
+* App Shell
+  * [App Shell モデル](https://developers.google.com/web/fundamentals/architecture/app-shell?hl=ja)
 
 # Book
 
