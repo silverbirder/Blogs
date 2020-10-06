@@ -56,8 +56,8 @@ Micro Frontendsに関わる記事を100件以上読みました(参考記事に�
 |観点|内容|
 |--|--|
 |独立性|・任意のテクノロジーと任意のチームで開発可能<br>|
-|展開|特定の機能をエンドツーエンド(バック、フロント、デプロイ）で確実に実行可能|
-|スケーラビリティ|フロントエンドのスケーラビリティ向上|
+|展開|・特定の機能をエンドツーエンド(バック、フロント、デプロイ）で確実に実行可能|
+|スケーラビリティ|・フロントエンドのスケーラビリティ向上|
 |堅牢|TODO|
 |俊敏性|・特定のドメインについて最高の知識を持つチーム間で作業を分散すると、リリースプロセスが確実にスピードアップして簡素化される。<br>・フロントエンドとリリースが小さいということは、リグレッションテストの表面がはるかに小さいことを意味します。リリースごとの変更は少なく、理論的にはテストに費やす時間を短縮できます。<br>・フロントエンドのアップグレード/変更にはコストが小さくなる|
 
@@ -75,10 +75,10 @@ Micro Frontendsに関わる記事を100件以上読みました(参考記事に�
 
 |統合|選択基準|技術|
 |--|--|--|
-|サーバーサイド統合|良好な読み込みパフォーマンスと検索エンジンのランキングがプロジェクトの優先事項であること|・Podium<br>・Ara-Framework<br>・Tailor<br>・Micromono<br>・PuzzleJS<br>・namecheap/ilc(Clientも可)|
-|エッジサイド統合|サーバーサイド統合と同じ|・Varnish EDI <br>・Edge Worker<br>・CDN<br>・ Akamai<br>・ Cloudfront<br>・ Fastly<br>・CloudFlare<br>・ Fly.io|
-|クライアント統合|さまざまなチームのユーザーインターフェイスを 1 つの画面に統合する必要があるインタラクティブなアプリケーションを構築すること|・Ajax<br>・Iframe<br>・Web Components<br>・Luigi<br>・Single-Spa<br>・FrintJS<br>・Hinclude<br>・Mashroom|
-|ビルド時統合|他の統合が非常に複雑に思われる場合に、小さなプロジェクト（3 チーム以下）にのみ使用すること|・ Bit.dev<br>・ Open Components<br>・ Piral|
+|サーバーサイド統合|良好な読み込みパフォーマンスと検索エンジンのランキング<br>がプロジェクトの優先事項であること|・Podium<br>・Ara-Framework<br>・Tailor<br>・Micromono<br>・PuzzleJS<br>・namecheap/ilc|
+|エッジサイド統合|サーバーサイド統合と同じ|・Varnish EDI <br>・Edge Worker<br><br>CDN<br>・ Akamai<br>・ Cloudfront<br>・ Fastly<br>・CloudFlare<br>・ Fly.io|
+|クライアント統合|さまざまなチームのユーザーインターフェイスを 1 つの画面に<br>統合する必要があるインタラクティブなアプリケーションを構築すること|・Ajax<br>・Iframe<br>・Web Components<br>・Luigi<br>・Single-Spa<br>・FrintJS<br>・Hinclude<br>・Mashroom|
+|ビルド時統合|他の統合が非常に複雑に思われる場合に、<br>小さなプロジェクト（3 チーム以下）にのみ使用すること|・ Bit.dev<br>・ Open Components<br>・ Piral|
 
 # 機能
 ## コミュニケーション
@@ -97,9 +97,10 @@ Micro Frontendsに関わる記事を100件以上読みました(参考記事に�
 ## モジュール共有
 
 * webpack
-  * Module Federation
-  * Externals
-  * DllPlugin
+
+[https://webpack.js.org/concepts/module-federation/:embed:cite]
+[https://webpack.js.org/configuration/externals/:embed:cite]
+[https://webpack.js.org/plugins/dll-plugin/:embed:cite]
 
 ## ルーティング
 
@@ -135,7 +136,6 @@ TODO
 * High Resolution Time API
 * User Timing API
 * Frame Timing API
-* [Performance](https://developer.mozilla.org/ja/docs/Web/API/Performance)
 * Server Timing API
 * Performance Observer
 
@@ -152,11 +152,6 @@ TODO
 
 * Lighthouse
 * WebpageTest
-
-## Performance
-
-* Skeleton UI
-* HTTP/2, HTTP/3
 
 ## Proxy
 
@@ -184,36 +179,21 @@ TODO
 マイクロフロントエンドは、かなりのオーバーラップがあるバンドの中央部分の大部分に最も適しています。バンドの両極端に該当するプロジェクトにマイクロフロントエンドアーキテクチャを実装しようとすると、生産性に反することが証明されます。
 
 # リポジトリ
-## モノリポ
 
-* Pros
-  * コードベース全体に簡単にアクセスできるようにする場合に最適に機能する。(検出可能性は高い)
-* Cons
-  * 時間の経過とともに、モノリポジトリは、特に大規模なチームで作業しているときに、動作が遅くなる傾向があり、バージョン管理下のコミットとファイルの数が増加する。
-
-[https://nx.dev:embed:cite]
-[https://github.com/lerna/lerna:embed:cite]
-
-## マルチリポ
-
-* Pros
-  * マルチリポジトリは、非常に大規模なプロジェクトとそれに取り組む非常に大規模なチームがある場合に最適。
-  * 独自のマイクロアプリに厳密に取り組むチームがある場合に最適に機能する。
-* Cons
-  * マルチリポジトリ環境では、各マイクロアプリを個別にビルドする必要がある。
+|パターン|Pros|Cons|技術|
+|--|--|--|--|
+|モノリポ|コードベース全体に簡単にアクセスできる。<br> (検出可能性が高い)|モノリポジトリは、特に大規模なチームで作業しているときに、<br>動作が遅くなる傾向があり、バージョン管理下のコミットとファイルの数が増加する。|・nx.dev<br>・lerna|
+|マルチリポ|・マルチリポジトリは、非常に大規模なプロジェクトと<br>それに取り組む非常に大規模なチームがある場合に最適。|マルチリポジトリ環境では、各マイクロアプリを<br>個別にビルドする必要がある。||
 
 # 他アーキテクチャ
-* Modular Monolith
-  * [Deconstructing the Monolith – Shopify Engineering](https://engineering.shopify.com/blogs/engineering/deconstructing-monolith-designing-software-maximizes-developer-productivity)
-  * [kgrzybek/modular-monolith-with-ddd](https://github.com/kgrzybek/modular-monolith-with-ddd)
-* Enterprise Architecture (Clean Architecture)
-  * [Building an Enterprise Application with Vue](https://medium.com/javascript-in-plain-english/building-vue-enterprise-application-part-0-overture-6d41bea14236)
-  * [soloschenko-grigoriy/vue-vuex-ts](https://github.com/soloschenko-grigoriy/vue-vuex-ts/)
-* Jam Stack
-* App Shell
-  * [App Shell モデル](https://developers.google.com/web/fundamentals/architecture/app-shell?hl=ja)
+|アーキテクチャ名|関係リンク|
+|--|--|
+|Modular Monolith|・[Deconstructing the Monolith – Shopify Engineering](https://engineering.shopify.com/blogs/engineering/deconstructing-monolith-designing-software-maximizes-developer-productivity)<br>・[kgrzybek/modular-monolith-with-ddd](https://github.com/kgrzybek/modular-monolith-with-ddd)|
+|Enterprise Architecture (Clean Architecture)|・[Building an Enterprise Application with Vue](https://medium.com/javascript-in-plain-english/building-vue-enterprise-application-part-0-overture-6d41bea14236)<br>・[soloschenko-grigoriy/vue-vuex-ts](https://github.com/soloschenko-grigoriy/vue-vuex-ts/)|
+|Jam Stack|[Jam Stack](https://jamstack.org/)|
+|App Shell|[App Shell モデル](https://developers.google.com/web/fundamentals/architecture/app-shell?hl=ja)|
 
-# Book
+#  書籍
 
 [https://www.manning.com/books/micro-frontends-in-action:embed:cite]
 
