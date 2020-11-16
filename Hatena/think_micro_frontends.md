@@ -164,6 +164,8 @@ Vaddin router
 
 ![document-application](https://miro.medium.com/max/1224/1*NJMQCgyMShhjYx6dE_pbRw.png)
 
+※ [Microfrontends: An approach to building Scalable Web Apps](https://www.linkedin.com/pulse/microfrontends-approach-building-scalable-web-apps-vinci-rufus)
+
 マイクロフロントエンドは、かなりのオーバーラップがあるバンドの中央部分の大部分に最も適しています。バンドの両極端に該当するプロジェクトにマイクロフロントエンドアーキテクチャを実装しようとすると、生産性に反するそうです。
 
 # リポジトリ
