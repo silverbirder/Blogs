@@ -59,12 +59,15 @@ MFEでは、各フロントエンドのフラグメント(HTML)を、どのタ�
 フラグメント(≒コンポーネント)をPackagingし、Packagingしたライブラリをimportさせてbuild(統合)します。あとは、buildした静的コンテンツをPublishさせるだけになります。
 
 ## サーバーサイド統合パターン
-サーバーサイド統合とは、Webサーバー側のHTML構築段階で統合するパターン。このパターンは、SSIやESI、Podium、Tailor、Ara-Frameworkなどが使われます。
+サーバーサイド統合とは、Webサーバー側のHTML構築段階で統合するパターンです。このパターンは、SSIやESI、Podium、Tailor、Ara-Frameworkなどが使われます。
 
 ![ssi](https://www.st-andrews.ac.uk/itsnew/web/images/ssi1.jpg)
 *[Server-side includes (SSI)](https://www.st-andrews.ac.uk/itsnew/web/ssi/index.shtml)*
 
-フラグメントを提供するWebサーバーを準備し、それらからフラグメント情報を収集し、全体のページHTMLを構築します。それをSSRとしてユーザーへ提供します。
+フラグメントを提供するサーバーを準備し、それらからフラグメント情報を収集し、全体のページHTMLを構築します。それをSSRとしてユーザーへ提供します。
+
+![cloudflare-worker](https://raw.githubusercontent.com/Silver-birder/micro-frontends-sample-code-5/f3c20954e6196cb578cd16caaf5999e07306fb51/overview.svg)
+*[github.com/Silver-birder/micro-frontends-sample-code-5](https://github.com/Silver-birder/micro-frontends-sample-code-5)*
 
 サーバーサイドのサンプルコードは、次にまとめています。
 
@@ -74,9 +77,6 @@ MFEでは、各フロントエンドのフラグメント(HTML)を、どのタ�
 
 また、サーバーサイドというよりEdgeでの統合パターンを下記リンクで紹介しています。
 
-![cloudflare-worker](https://raw.githubusercontent.com/Silver-birder/micro-frontends-sample-code-5/f3c20954e6196cb578cd16caaf5999e07306fb51/overview.svg)
-*[github.com/Silver-birder/micro-frontends-sample-code-5](https://github.com/Silver-birder/micro-frontends-sample-code-5)*
-
 * [Cloudflare Workers (Edge Workers) で Micro Frontends](https://silverbirder180.hatenablog.com/entry/2020/11/15/121730)
 
 ※ リッチなインタラクションUIを表現したいなら、サーバーサイドとクライアントのHydrationをする必要があります。
@@ -84,7 +84,7 @@ MFEでは、各フロントエンドのフラグメント(HTML)を、どのタ�
 ## クライアントサイド統合パターン
 クライアントサイド統合とは、ブラウザ側レンダリングの段階で統合するパターンです。このパターンは、iframeやWebComponentsなどが使われます。
 
-iframeを使ったページ(フラグメント)埋め込みをさせ、全体のページHTMLを統合させたり、WebComponentsのようにカスタムDOMを定義したHTMLタグでページを構成したりします。
+iframeを使ったページ(フラグメント)埋め込み、全体のページHTMLを統合させたり、WebComponentsのようにカスタムエレメントを定義したHTMLタグでページを構成したりします。
 
 ![client side integration pattern](https://bluesoft.com/wp-content/uploads/2020/04/Micro-Frontends-11.jpg)
 *[Micro Frontends – The Missing Piece Of The Puzzle In Feature Teams | BlueSoft](https://bluesoft.com/micro-frontends-the-missing-piece-of-the-puzzle-in-feature-teams/)*
