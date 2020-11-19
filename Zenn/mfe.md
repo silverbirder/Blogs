@@ -1,5 +1,5 @@
 # Links
-TODO
+https://zenn.dev/silverbirder/articles/f74e219ffdef26b4a37b
 
 # Title
 [覚書] Micro Frontends 📚
@@ -18,7 +18,7 @@ Microservices化によって、Scalability、Agility、Independency、Availabili
 ![verticals-headline](https://micro-frontends-japanese.org/resources/verticals-headline.png)
 *[[翻訳記事]マイクロフロントエンド](https://micro-frontends-japanese.org/)*
 
-ただし、全てのフロントエンドをMFEにする必要はありません。先程の説明にもあった通り、規模が拡大した際にMFEを検討する必要があるため、小・中規模のWebサービスでは時期尚早です。また、次の画像にもある通り、静的ページ(Webサイト,Webドキュメント)や動的ページ(Webアプリ)の両極端に位置するWebサービスはMFEの適用するのには不向きです(と書いています)。両方の要素が求められるWebサービスにMFEが役立ちます。MFEの適用されるWebサービス事例では、ECサイトが挙げられます。
+ただし、全てのWebサービスをMFEにする必要はありません。先程の説明にもあった通り、規模が拡大した際にMFEを検討する必要があるため、小・中規模のWebサービスでは時期尚早です。また、次の画像にもある通り、静的ページ(Webサイト,Webドキュメント)や動的ページ(Webアプリ)の両極端に位置するWebサービスはMFEの適用するのには不向きです(と書いています)。両方の要素が求められるWebサービスにMFEが役立ちます。MFEの適用されるWebサービス事例では、ECサイトが挙げられます。
 
 ![mfe-web-document-to-web-app](https://media-exp1.licdn.com/dms/image/C5612AQEMjY51MwQMww/article-inline_image-shrink_1000_1488/0?e=1611187200&v=beta&t=EGumrK4ul8MRLTYa-gGjT93c4b7qSFWyzH9mwp5mq0w)
 *[Microfrontends: An approach to building Scalable Web Apps](https://www.linkedin.com/pulse/microfrontends-approach-building-scalable-web-apps-vinci-rufus)*
@@ -31,7 +31,8 @@ Microservices化によって、Scalability、Agility、Independency、Availabili
 実績企業としては、IKEA、DAZN、Spotifyなどが挙げられます。他の例は、[Micro Frontends を調べたすべて](https://silverbirder180.hatenablog.com/entry/2020/10/07/190727) にリストアップしていますので、興味がある方はご覧ください。
 
 # メリット・デメリット🔍
-MFEを導入することによるメリット・デメリットについて、(プロダクション導入経験無しの私が偏見で)簡単に紹介します。
+MFEを導入することによるメリット・デメリットについて、(プロダクション導入経験無しの私が偏見で)簡単に紹介します。Microservicesのメリット・デメリットと似ていると思います。
+
 私が思う最大のメリットは、**Agility**と思います。規模が中・大規模なWebサービスとなると、様々な業務ドメインが詰め込まれます。先程のMFEの例(ECサイト)でいうと、推薦(inspire)、検索(search)、商品(product)、注文(checkout)などにあたります。これらを1つのフロントエンドで構築すると、ドメイン設計を適切に分離できたとしても、**開発者の業務ドメイン知識が追いつかず、開発スピードが低下してしまいます**。結果、特定の開発者の属人化が加速し、ボトルネックとなります。
 そこで、それぞれ**業務ドメインを分割することで、開発者はそこだけにフォーカスできます。結果、開発スピードは維持できるはずです**。
 
@@ -56,7 +57,7 @@ MFEでは、各フロントエンドのフラグメント(HTML)を、どのタ�
 ![bit.dev toppage](https://storage.googleapis.com/zenn-user-upload/e74w0sjnj1r0zpzvd5xfvsk7k1bd)
 *[bit.dev](https://bit.dev/)*
 
-フラグメント(≒コンポーネント)をPackagingし、Packagingしたライブラリをimportさせてbuild(統合)します。あとは、buildした静的コンテンツをPublishさせるだけになります。
+フラグメントをPackagingし、Packagingしたライブラリをimportさせてbuild(統合)します。あとは、buildした静的コンテンツをPublishさせるだけになります。
 
 ## サーバーサイド統合パターン
 サーバーサイド統合とは、Webサーバー側のHTML構築段階で統合するパターンです。このパターンは、SSIやESI、Podium、Tailor、Ara-Frameworkなどが使われます。
@@ -90,7 +91,11 @@ iframeを使ったページ(フラグメント)埋め込み、全体のページ
 *[Micro Frontends – The Missing Piece Of The Puzzle In Feature Teams | BlueSoft](https://bluesoft.com/micro-frontends-the-missing-piece-of-the-puzzle-in-feature-teams/)*
 
 # 終わりに👨‍💻👩‍💻
-MFEのアプローチを実際に導入した企業は、国内だとまだ比較的少なく、どういった場面で役立つのかあまり明確ではありません。ですが、依然モノリスな中・大規模なWebサービスを運用するならば、特にフロントエンドの進化が激しい界隈の中、サービス提供を維持するのは難しいと思います。
+MFEのアプローチを実際に導入した企業は、国内だとまだ比較的少なく、どういった場面で役立つのかあまり明確ではありません。また、書籍や知見も多くはないため、未知な領域と思います。
+
+ただ、依然フロントエンドがモノリスな、中・大規模なWebサービスを運用するならば、特に進化が激しいフロントエンド界隈の中で、サービス提供の速度、品質を維持するのは難しいと思います。フロントエンドもMicroservices化する場面が訪れるかもしれません。そんなときに、この記事を思い出して頂ければ幸いです。
+
+※ 独り言ですが、MFEの構築アプローチとして、Edge Worker + Web Components の組み合わせが最近好みです。 
 
 # 関連リンク🔗
 私が書いたMFE関連の記事です。もしよければご覧ください。
@@ -101,3 +106,11 @@ MFEのアプローチを実際に導入した企業は、国内だとまだ比�
 * [Ara-Framework で Micro Frontends with SSR](https://silverbirder180.hatenablog.com/entry/2020/08/23/183713)
 * [Zalando tailor で Micro Frontends with ( LitElement & etcetera)](https://silverbirder180.hatenablog.com/entry/2020/10/04/095230)
 * [Cloudflare Workers (Edge Workers) で Micro Frontends](https://silverbirder180.hatenablog.com/entry/2020/11/15/121730)
+* [github.com/Silver-birder/micro-frontends-on-kubernetes](https://github.com/Silver-birder/micro-frontends-on-kubernetes)
+* [speakerdeck.com/silverbirder/micro-frontends-on-kubernetes-trial](https://speakerdeck.com/silverbirder/micro-frontends-on-kubernetes-trial)
+* [github.com/Silver-birder/think-micro-frontends](https://github.com/Silver-birder/think-micro-frontends)
+* [github.com/Silver-birder/micro-frontends-sample-code](https://github.com/Silver-birder/micro-frontends-sample-code)
+* [github.com/Silver-birder/micro-frontends-sample-code-2](https://github.com/Silver-birder/micro-frontends-sample-code-2)
+* [github.com/Silver-birder/micro-frontends-sample-code-3](https://github.com/Silver-birder/micro-frontends-sample-code-3)
+* [github.com/Silver-birder/micro-frontends-sample-code-4](https://github.com/Silver-birder/micro-frontends-sample-code-4)
+* [github.com/Silver-birder/micro-frontends-sample-code-5](https://github.com/Silver-birder/micro-frontends-sample-code-5)
