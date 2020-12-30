@@ -1,5 +1,5 @@
 # Links
-TODO
+https://silverbirder180.hatenablog.com/entry/2020/12/30/130403
 
 # Title
 2020年の振り返り。結婚と継続力
@@ -23,7 +23,7 @@ TODO
 
 UseCotlinは、主に技術のインプットばかりで、アウトプットができていません。インプットのし過ぎで、頭でっかちにならないよう、毎日アウトプットを心がけていました。
 
-<img src="https://grass-graph.moshimo.works/images/Silver-birder.png">
+[f:id:silverbirder180:20201230130209p:plain]
 
 ほぼ毎日、contributeするようにしました。InputとOutputのバランスは難しいですが、取り組んで良かったです。
 
