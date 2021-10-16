@@ -1,3 +1,5 @@
+Move to https://github.com/Silver-birder/Silver-birder.github.io
+
 # Blogs
 My Blogs Contents
 
